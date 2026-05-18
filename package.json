@@ -1,0 +1,33 @@
+{
+  "name": "maarmapa-site",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Tienda personal de obras originales de maarmapa — pinturas, óleos, edición limitada. Pagos en CLP (Mercado Pago, Khipu) o USDC (x402 en Base).",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "export:ipfs": "next build && next export -o out-ipfs"
+  },
+  "dependencies": {
+    "next": "15.0.3",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "@supabase/supabase-js": "^2.45.0",
+    "mercadopago": "^2.0.15",
+    "viem": "^2.21.0",
+    "clsx": "^2.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "typescript": "^5.6.0",
+    "tailwindcss": "^4.0.0",
+    "@tailwindcss/postcss": "^4.0.0",
+    "postcss": "^8.4.49",
+    "eslint": "^9.0.0",
+    "eslint-config-next": "15.0.3"
+  }
+}
