@@ -11,7 +11,7 @@ export function X402Verify({ order }: { order: string }) {
 
   async function verify() {
     if (!hash.startsWith("0x") || hash.length < 60) {
-      setResult({ ok: false, message: "Hash inválido" });
+      setResult({ ok: false, message: "invalid hash" });
       return;
     }
     setVerifying(true);
@@ -26,12 +26,12 @@ export function X402Verify({ order }: { order: string }) {
       if (res.ok && data.ok) {
         setResult({ ok: true, payer: data.payer });
       } else {
-        setResult({ ok: false, message: data.message || "Error" });
+        setResult({ ok: false, message: data.message || "error" });
       }
     } catch (e) {
       setResult({
         ok: false,
-        message: e instanceof Error ? e.message : "Error de red",
+        message: e instanceof Error ? e.message : "network error",
       });
     } finally {
       setVerifying(false);
@@ -39,39 +39,45 @@ export function X402Verify({ order }: { order: string }) {
   }
 
   return (
-    <div className="mt-6 pt-6 border-t border-black/10">
-      <label className="text-sm font-medium">Hash de tu transacción</label>
+    <div className="border border-[var(--color-gray)] p-5 mb-6">
+      <label className="font-mono text-[9px] text-[var(--color-dim)] uppercase tracking-[0.2em] mb-2 block">
+        ── transaction hash
+      </label>
       <input
         type="text"
         placeholder="0x..."
         value={hash}
         onChange={(e) => setHash(e.target.value.trim())}
-        className="mt-2 w-full p-3 border border-black/20 font-mono text-xs"
+        className="w-full p-3 bg-[var(--color-black)] border border-[var(--color-gray)] focus:border-[var(--color-green)] outline-none font-mono text-[11px] text-[var(--color-white)] transition-colors"
       />
       <button
         onClick={verify}
         disabled={verifying || !hash}
-        className="mt-3 w-full py-3 bg-[var(--color-ink)] text-[var(--color-canvas)] disabled:opacity-50 hover:bg-[var(--color-gold)] transition"
+        className="btn-p w-full mt-3"
       >
-        {verifying ? "Verificando on-chain…" : "Verificar pago"}
+        {verifying ? "verifying on-chain…" : "verify payment ↗"}
       </button>
 
       {result?.ok && (
-        <div className="mt-4 p-4 bg-green-50 border border-green-200 text-sm">
-          <p className="font-medium text-green-900">✓ Pago verificado</p>
-          <p className="mt-1 text-green-700">
-            Tu obra ya está reservada. Te contactaremos por email para
+        <div className="mt-4 p-4 border border-[var(--color-green)] bg-[var(--color-green)]/5">
+          <p className="font-mono text-[10px] font-bold text-[var(--color-green)] tracking-[0.2em] uppercase mb-2">
+            ✓ payment verified
+          </p>
+          <p className="font-mono text-xs text-[var(--color-aaa)]">
+            tu obra ya está reservada. te contactaremos por email para
             coordinar el envío.
           </p>
           {result.payer && (
-            <p className="text-xs mt-2 font-mono text-green-700">
-              Desde: {result.payer}
+            <p className="font-mono text-[10px] text-[var(--color-dim)] mt-2 break-all">
+              from: <span className="text-[var(--color-green)]">{result.payer}</span>
             </p>
           )}
         </div>
       )}
       {result && !result.ok && (
-        <p className="mt-3 text-sm text-red-600">⚠ {result.message}</p>
+        <p className="mt-3 font-mono text-xs text-[var(--color-pink)]">
+          ⚠ {result.message}
+        </p>
       )}
     </div>
   );

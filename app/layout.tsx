@@ -3,16 +3,16 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "maarmapa — Original Oil Paintings by Chilean Artist",
+    default: "maarmapa — original paintings",
     template: "%s · maarmapa",
   },
   description:
-    "Galería personal de obras originales del artista chileno maarmapa. Pinturas al óleo, acrílico, arte contemporáneo. Envíos a Chile y al mundo.",
+    "Obra original sobre lienzo. Arte contemporáneo chileno. Cada pieza, única — firmada, certificada, irrepetible.",
   metadataBase: new URL("https://maarmapa.eth.limo"),
   openGraph: {
-    title: "maarmapa — Original Oil Paintings",
+    title: "maarmapa — original paintings",
     description:
-      "Galería personal de obras originales del artista chileno maarmapa.",
+      "Obra original sobre lienzo. Arte contemporáneo chileno.",
     url: "https://maarmapa.eth.limo",
     siteName: "maarmapa",
     locale: "es_CL",
@@ -36,61 +36,68 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
         <link
-          href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=IBM+Plex+Mono:wght@400;700&display=swap"
           rel="stylesheet"
         />
       </head>
       <body>
-        <header className="border-b border-black/10">
-          <nav className="container-wide flex items-center justify-between py-6">
-            <a href="/" className="text-xl font-display tracking-wide">
-              maarmapa<span className="text-[var(--color-accent)]">.</span>
+        {/* ── NAV ── */}
+        <nav className="sticky top-0 z-[100] bg-[var(--color-black)] border-b border-[var(--color-gray)] py-3 -mx-5 px-5 flex justify-between items-center">
+          <a
+            href="/"
+            className="font-mono text-sm font-bold text-[var(--color-white)] tracking-[-0.01em]"
+          >
+            maar<span className="text-[var(--color-pink)]">ma</span>
+            <span className="text-[var(--color-green)]">pa</span>
+          </a>
+          <div className="flex gap-5 items-center">
+            <a
+              href="/sobre"
+              className="font-mono text-[11px] text-[var(--color-dim)] tracking-wider lowercase transition-colors hover:text-[var(--color-green)]"
+            >
+              about
             </a>
-            <ul className="hidden md:flex gap-8 text-sm">
-              <li><a href="/" className="hover:text-[var(--color-gold)]">Obras</a></li>
-              <li><a href="/sobre" className="hover:text-[var(--color-gold)]">Sobre</a></li>
-              <li><a href="/contacto" className="hover:text-[var(--color-gold)]">Contacto</a></li>
-            </ul>
-          </nav>
-        </header>
+            <a
+              href="/contacto"
+              className="font-mono text-[11px] text-[var(--color-dim)] tracking-wider lowercase transition-colors hover:text-[var(--color-green)]"
+            >
+              contact
+            </a>
+            <a
+              href="/#obras"
+              className="font-mono text-[11px] font-bold text-[var(--color-pink)] border border-[var(--color-pink)] px-2.5 py-1 lowercase transition-all hover:bg-[var(--color-pink)] hover:text-[var(--color-black)]"
+            >
+              shop ↗
+            </a>
+          </div>
+        </nav>
 
         <main>{children}</main>
 
-        <footer className="border-t border-black/10 mt-24">
-          <div className="container-wide py-10 grid gap-6 md:grid-cols-3 text-sm text-[var(--color-muted)]">
-            <div>
-              <p className="font-display text-lg text-[var(--color-ink)]">
-                maarmapa
-              </p>
-              <p className="mt-2">Original oil paintings · Chile</p>
-            </div>
-            <div>
-              <p className="font-medium text-[var(--color-ink)]">Contacto</p>
-              <p className="mt-2">
-                <a href="mailto:mario@boykot.cl" className="hover:underline">
-                  mario@boykot.cl
-                </a>
-              </p>
-              <p>
-                <a
-                  href="https://instagram.com/maarmapa"
-                  className="hover:underline"
-                >
-                  @maarmapa en Instagram
-                </a>
-              </p>
-            </div>
-            <div>
-              <p className="font-medium text-[var(--color-ink)]">Pagos</p>
-              <p className="mt-2">Mercado Pago · Khipu · USDC (x402)</p>
-              <p className="mt-1 text-xs">
-                ENS: <code>maarmapa.eth</code>
-              </p>
-            </div>
+        {/* ── FOOTER ── */}
+        <footer className="py-7 pb-10 flex justify-between items-start flex-wrap gap-4 mt-12">
+          <div className="font-mono text-xs font-bold text-[var(--color-dim)]">
+            maar<span className="text-[var(--color-pink)]">mapa</span>
           </div>
-          <div className="container-wide pb-6 text-xs text-[var(--color-muted)]">
-            © {new Date().getFullYear()} maarmapa — All works © Mario
-            Maldonado Parra
+          <div className="flex flex-col gap-1.5 text-right">
+            <a
+              href="mailto:mario@boykot.cl"
+              className="font-mono text-[10px] text-[#444] tracking-wider transition-colors hover:text-[var(--color-white)]"
+            >
+              mario@boykot.cl
+            </a>
+            <a
+              href="https://instagram.com/maarmapa"
+              className="font-mono text-[10px] text-[#444] tracking-wider transition-colors hover:text-[var(--color-white)]"
+            >
+              instagram ↗
+            </a>
+            <code className="font-mono text-[10px] text-[#444] tracking-wider">
+              maarmapa.eth
+            </code>
+          </div>
+          <div className="w-full font-mono text-[9px] text-[#333] tracking-wider pt-4 border-t border-[#1a1a1a]">
+            © {new Date().getFullYear()} maarmapa — all works © mario maldonado parra
           </div>
         </footer>
       </body>

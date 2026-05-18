@@ -24,7 +24,7 @@ export async function generateMetadata({
   const art = getArtwork(slug);
   if (!art) return { title: "Obra no encontrada" };
   return {
-    title: art.title,
+    title: art.title.toLowerCase(),
     description: art.description,
     openGraph: {
       title: `${art.title} — maarmapa`,
@@ -43,71 +43,131 @@ export default async function ArtworkPage({
   const art = getArtwork(slug);
   if (!art) notFound();
 
+  const idx = artworks.findIndex((a) => a.slug === slug);
+  const num = String(idx + 1).padStart(3, "0");
+  const statusClass =
+    art.status === "available"
+      ? "s-av"
+      : art.status === "sold"
+        ? "s-so"
+        : "s-re";
+  const statusLabel =
+    art.status === "available"
+      ? "available"
+      : art.status === "sold"
+        ? "sold"
+        : "reserved";
+
   return (
-    <article className="container-wide pt-12 pb-24">
+    <article className="pt-8 pb-16">
+      {/* Breadcrumb */}
       <Link
         href="/"
-        className="text-sm text-[var(--color-muted)] hover:text-[var(--color-ink)]"
+        className="font-mono text-[10px] text-[var(--color-dim)] tracking-wider lowercase hover:text-[var(--color-green)] transition-colors"
       >
-        ← Volver a obras
+        ← back to catalog
       </Link>
 
-      <div className="mt-8 grid gap-12 lg:grid-cols-[3fr_2fr]">
-        {/* Imagen */}
-        <div className="relative aspect-[3/4] bg-white border border-black/5">
-          <Image
-            src={art.image}
-            alt={art.title}
-            fill
-            priority
-            sizes="(max-width: 1024px) 100vw, 60vw"
-            className="object-contain"
-          />
+      {/* Header */}
+      <div className="border-b border-[var(--color-gray)] pb-6 mt-6">
+        <div className="flex justify-between items-start mb-4 flex-wrap gap-2">
+          <span className="font-mono text-[10px] text-[var(--color-dim)] tracking-wider">
+            {num} / {art.title}
+          </span>
+          <span className={`entry-status ${statusClass}`}>{statusLabel}</span>
         </div>
+        <h1 className="font-display text-[clamp(32px,9vw,56px)] font-black tracking-[-0.03em] text-[var(--color-white)] leading-[0.92] mb-3">
+          {art.title}
+        </h1>
+        <p className="font-mono text-[11px] text-[var(--color-dim)] tracking-wide">
+          by {artist.name} · {art.technique.toLowerCase()} ·{" "}
+          <span className="text-[var(--color-green)]">{art.year}</span>
+        </p>
+      </div>
 
-        {/* Info + pagos */}
-        <div className="flex flex-col">
-          <p className="text-xs uppercase tracking-[0.3em] text-[var(--color-muted)]">
+      {/* Image */}
+      <div className="relative my-6 bg-[var(--color-black)] overflow-hidden">
+        <Image
+          src={art.image}
+          alt={art.title}
+          width={1200}
+          height={1500}
+          sizes="(max-width: 680px) 100vw, 640px"
+          className="w-full block"
+          style={{ filter: "brightness(.9) contrast(1.05)" }}
+          priority
+        />
+      </div>
+
+      {/* Specs */}
+      <div className="border border-[var(--color-gray)] divide-y divide-[var(--color-gray)] mb-8">
+        <div className="grid grid-cols-[120px_1fr] items-baseline p-3.5">
+          <dt className="font-mono text-[10px] text-[var(--color-dim)] uppercase tracking-wider">
+            technique
+          </dt>
+          <dd className="font-mono text-xs text-[var(--color-white)]">
+            {art.technique}
+          </dd>
+        </div>
+        <div className="grid grid-cols-[120px_1fr] items-baseline p-3.5">
+          <dt className="font-mono text-[10px] text-[var(--color-dim)] uppercase tracking-wider">
+            dimensions
+          </dt>
+          <dd className="font-mono text-xs text-[var(--color-white)]">
+            {art.dimensions}
+          </dd>
+        </div>
+        <div className="grid grid-cols-[120px_1fr] items-baseline p-3.5">
+          <dt className="font-mono text-[10px] text-[var(--color-dim)] uppercase tracking-wider">
+            year
+          </dt>
+          <dd className="font-mono text-xs text-[var(--color-green)]">
+            {art.year}
+          </dd>
+        </div>
+        <div className="grid grid-cols-[120px_1fr] items-baseline p-3.5">
+          <dt className="font-mono text-[10px] text-[var(--color-dim)] uppercase tracking-wider">
+            edition
+          </dt>
+          <dd className="font-mono text-xs text-[var(--color-white)]">
             {art.edition}
-          </p>
-          <h1 className="font-display text-4xl md:text-5xl mt-2 leading-tight">
-            {art.title}
-          </h1>
-          <p className="mt-2 text-[var(--color-muted)]">
-            por {artist.name} · {art.year}
-          </p>
-
-          <dl className="mt-8 grid grid-cols-[auto_1fr] gap-x-4 gap-y-2 text-sm">
-            <dt className="text-[var(--color-muted)]">Técnica</dt>
-            <dd>{art.technique}</dd>
-            <dt className="text-[var(--color-muted)]">Dimensiones</dt>
-            <dd>{art.dimensions}</dd>
-            <dt className="text-[var(--color-muted)]">Año</dt>
-            <dd>{art.year}</dd>
-            <dt className="text-[var(--color-muted)]">Firma</dt>
-            <dd>{art.signed}</dd>
-          </dl>
-
-          <p className="mt-8 leading-relaxed text-[var(--color-muted)]">
-            {art.description}
-          </p>
-
-          <div className="mt-10 pt-8 border-t border-black/10">
-            <div className="flex items-baseline gap-3">
-              <p className="text-3xl font-display">{formatClp(art.priceClp)}</p>
-              <p className="text-sm text-[var(--color-muted)]">
-                / {formatUsd(art.priceUsd)} USD
-              </p>
-            </div>
-            <p className="mt-1 text-xs text-[var(--color-muted)]">
-              Incluye certificado de autenticidad. Envío internacional con
-              seguro (cotizado aparte).
-            </p>
-
-            <PaymentOptions artwork={art} />
-          </div>
+          </dd>
+        </div>
+        <div className="grid grid-cols-[120px_1fr] items-baseline p-3.5">
+          <dt className="font-mono text-[10px] text-[var(--color-dim)] uppercase tracking-wider">
+            signed
+          </dt>
+          <dd className="font-mono text-xs text-[var(--color-aaa)] leading-relaxed">
+            {art.signed}
+          </dd>
         </div>
       </div>
+
+      {/* Description */}
+      <p className="font-mono text-xs text-[var(--color-aaa)] leading-[1.8] mb-10 max-w-[560px]">
+        {art.description}
+      </p>
+
+      {/* Price block */}
+      <div className="border-t-2 border-[var(--color-white)] pt-6 mb-6">
+        <div className="font-mono text-[9px] font-bold text-[var(--color-dim)] tracking-[0.2em] uppercase mb-3">
+          ── price
+        </div>
+        <div className="flex items-baseline gap-3 flex-wrap">
+          <p className="font-display text-4xl md:text-5xl font-black text-[var(--color-white)] tracking-[-0.02em]">
+            {formatClp(art.priceClp)}
+          </p>
+          <p className="font-mono text-[11px] text-[var(--color-dim)]">
+            / {formatUsd(art.priceUsd)} usd /{" "}
+            <span className="text-[var(--color-pink)]">{art.priceUsd} usdc</span>
+          </p>
+        </div>
+        <p className="mt-2 font-mono text-[10px] text-[var(--color-dim)] tracking-wide">
+          incluye certificado de autenticidad · envío internacional cotizado aparte
+        </p>
+      </div>
+
+      <PaymentOptions artwork={art} />
     </article>
   );
 }

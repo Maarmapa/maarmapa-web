@@ -1,58 +1,102 @@
 import { artist } from "@/lib/artworks";
 
 export const metadata = {
-  title: "Sobre maarmapa",
-  description: "Artista chileno contemporáneo. Pintura al óleo, arte urbano.",
+  title: "about",
+  description: "Mario Maldonado Parra. Artista contemporáneo chileno.",
 };
 
 export default function AboutPage() {
   return (
-    <article className="container-narrow py-20">
-      <p className="text-xs uppercase tracking-[0.3em] text-[var(--color-muted)]">
-        Sobre
-      </p>
-      <h1 className="font-display text-5xl mt-3">{artist.fullName}</h1>
-      <p className="mt-2 text-[var(--color-muted)]">aka {artist.name}</p>
+    <article className="pt-12 pb-16">
+      <div className="font-mono text-[9px] font-bold text-[var(--color-dim)] tracking-[0.3em] uppercase mb-4">
+        ── about
+      </div>
 
-      <div className="mt-10 prose prose-lg max-w-none text-[var(--color-muted)] leading-relaxed space-y-4">
+      <h1 className="font-display text-[clamp(40px,11vw,72px)] font-black tracking-[-0.03em] leading-[0.92] mb-3">
+        {artist.fullName.split(" ").map((word, i, arr) => {
+          const accent =
+            i === arr.length - 1
+              ? "text-[var(--color-pink)]"
+              : i === 0
+                ? "text-[var(--color-white)]"
+                : "text-[var(--color-white)]";
+          return (
+            <span key={i} className={`${accent} block md:inline`}>
+              {word}{" "}
+            </span>
+          );
+        })}
+      </h1>
+      <p className="font-mono text-[11px] text-[var(--color-dim)] tracking-wide mb-10">
+        aka{" "}
+        <span className="text-[var(--color-green)]">{artist.name}</span> ·{" "}
+        based in {artist.city.toLowerCase()}
+      </p>
+
+      <div className="space-y-4 font-mono text-xs text-[var(--color-aaa)] leading-[1.8] max-w-[560px]">
         <p>{artist.bio}</p>
         <p>
-          Mi trabajo cruza la cultura pop, el graffiti, la pintura al óleo
-          clásica y la memoria urbana. Cada obra es única, firmada y
-          documentada con certificado de autenticidad.
+          Mi trabajo cruza cultura pop, graffiti, pintura al óleo clásica
+          y memoria urbana. Cada obra es única, firmada y documentada con
+          certificado de autenticidad.
         </p>
         <p>
           Esta galería opera sin intermediarios: las obras se venden
-          directamente desde mi estudio, con envío internacional asegurado.
+          directamente desde mi estudio, con envío internacional
+          asegurado.
         </p>
       </div>
 
-      <div className="mt-12 pt-8 border-t border-black/10 grid gap-4 sm:grid-cols-2 text-sm">
-        <div>
-          <p className="text-[var(--color-muted)]">Email</p>
-          <a
-            href={`mailto:${artist.email}`}
-            className="underline hover:text-[var(--color-gold)]"
-          >
-            {artist.email}
-          </a>
+      {/* Stats / facts */}
+      <div className="mt-12 border-t-2 border-[var(--color-white)] pt-6">
+        <div className="font-mono text-[9px] font-bold text-[var(--color-dim)] tracking-[0.3em] uppercase mb-4">
+          ── stats
         </div>
-        <div>
-          <p className="text-[var(--color-muted)]">Instagram</p>
-          <a
-            href={`https://instagram.com/${artist.instagram.replace("@", "")}`}
-            className="underline hover:text-[var(--color-gold)]"
-          >
-            {artist.instagram}
-          </a>
-        </div>
-        <div>
-          <p className="text-[var(--color-muted)]">ENS</p>
-          <code>{artist.ens}</code>
-        </div>
-        <div>
-          <p className="text-[var(--color-muted)]">Ciudad</p>
-          <p>{artist.city}</p>
+        <div className="border border-[var(--color-gray)] divide-y divide-[var(--color-gray)]">
+          <div className="grid grid-cols-[120px_1fr] p-3.5">
+            <dt className="font-mono text-[10px] text-[var(--color-dim)] uppercase tracking-wider">
+              email
+            </dt>
+            <dd>
+              <a
+                href={`mailto:${artist.email}`}
+                className="font-mono text-xs text-[var(--color-white)] hover:text-[var(--color-green)] transition-colors"
+              >
+                {artist.email}
+              </a>
+            </dd>
+          </div>
+          <div className="grid grid-cols-[120px_1fr] p-3.5">
+            <dt className="font-mono text-[10px] text-[var(--color-dim)] uppercase tracking-wider">
+              instagram
+            </dt>
+            <dd>
+              <a
+                href={`https://instagram.com/${artist.instagram.replace("@", "")}`}
+                className="font-mono text-xs text-[var(--color-white)] hover:text-[var(--color-green)] transition-colors"
+              >
+                {artist.instagram}
+              </a>
+            </dd>
+          </div>
+          <div className="grid grid-cols-[120px_1fr] p-3.5">
+            <dt className="font-mono text-[10px] text-[var(--color-dim)] uppercase tracking-wider">
+              ens
+            </dt>
+            <dd>
+              <code className="font-mono text-xs text-[var(--color-pink)]">
+                {artist.ens}
+              </code>
+            </dd>
+          </div>
+          <div className="grid grid-cols-[120px_1fr] p-3.5">
+            <dt className="font-mono text-[10px] text-[var(--color-dim)] uppercase tracking-wider">
+              city
+            </dt>
+            <dd className="font-mono text-xs text-[var(--color-aaa)]">
+              {artist.city}
+            </dd>
+          </div>
         </div>
       </div>
     </article>

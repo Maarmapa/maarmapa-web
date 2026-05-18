@@ -1,41 +1,275 @@
 @import "tailwindcss";
 
+/* ─────────────────────────────────────────────────────────────
+   maarmapa · design tokens
+   Extraídos del sitio actual maarmapa.eth.limo
+   Aesthetic: cyberpunk / brutalist / web3-native
+   ───────────────────────────────────────────────────────────── */
 @theme {
-  --color-canvas: #f8f7f4;
-  --color-ink: #0a0a0a;
-  --color-muted: #6a6a6a;
-  --color-accent: #c8a44d;
-  --color-gold: #b8862a;
-  --font-display: "Cormorant Garamond", "Times New Roman", serif;
-  --font-body: "Inter", system-ui, sans-serif;
+  --color-pink: #ff0080;
+  --color-pink-dark: #cc006a;
+  --color-green: #24ff00;
+  --color-black: #0a0a0a;
+  --color-white: #f5f5f0;
+  --color-gray: #333333;
+  --color-dim: #888888;
+  --color-aaa: #aaaaaa;
+  --font-display: "Inter", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
 }
 
 @layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
   html {
-    background: var(--color-canvas);
-    color: var(--color-ink);
-    font-family: var(--font-body);
-    -webkit-font-smoothing: antialiased;
+    scroll-behavior: smooth;
   }
   body {
-    min-height: 100vh;
+    background: var(--color-black);
+    color: var(--color-white);
+    font-family: var(--font-mono);
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 20px;
+    overflow-x: hidden;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
   }
-  h1, h2, h3, h4 {
-    font-family: var(--font-display);
-    font-weight: 400;
-    letter-spacing: -0.01em;
+  /* Scanline texture sutil (CRT vibe) */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.03) 2px,
+      rgba(0, 0, 0, 0.03) 4px
+    );
+    pointer-events: none;
   }
   ::selection {
-    background: var(--color-ink);
-    color: var(--color-canvas);
+    background: var(--color-pink);
+    color: var(--color-black);
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  button {
+    font-family: inherit;
+    cursor: pointer;
+  }
+  input,
+  textarea {
+    font-family: inherit;
   }
 }
 
-@layer utilities {
-  .container-narrow {
-    @apply max-w-4xl mx-auto px-6;
+@layer components {
+  /* ── BOTONES ── */
+  .btn-p {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 10px 22px;
+    background: var(--color-pink);
+    color: var(--color-black);
+    text-decoration: none;
+    transition: background 0.15s;
+    display: inline-block;
+    border: none;
+    cursor: pointer;
   }
-  .container-wide {
-    @apply max-w-7xl mx-auto px-6;
+  .btn-p:hover {
+    background: var(--color-pink-dark);
+    color: var(--color-white);
+  }
+  .btn-p:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .btn-g {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 10px 22px;
+    background: transparent;
+    border: 1px solid var(--color-dim);
+    color: var(--color-dim);
+    text-decoration: none;
+    transition: all 0.15s;
+    display: inline-block;
+    cursor: pointer;
+  }
+  .btn-g:hover {
+    border-color: var(--color-white);
+    color: var(--color-white);
+  }
+  .btn-g:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  /* Variante green outline */
+  .btn-green-outline {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 10px 22px;
+    background: transparent;
+    border: 1px solid var(--color-green);
+    color: var(--color-green);
+    transition: all 0.15s;
+    cursor: pointer;
+  }
+  .btn-green-outline:hover {
+    background: var(--color-green);
+    color: var(--color-black);
+  }
+
+  /* ── TAG ── */
+  .tag {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border: 1px solid var(--color-gray);
+    color: var(--color-dim);
+    display: inline-block;
+  }
+  .tag.t-pink {
+    border-color: var(--color-pink);
+    color: var(--color-pink);
+  }
+  .tag.t-green {
+    border-color: var(--color-green);
+    color: var(--color-green);
+  }
+
+  /* ── STATUS BADGE ── */
+  .entry-status {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    display: inline-block;
+  }
+  .s-av {
+    background: var(--color-green);
+    color: var(--color-black);
+  }
+  .s-so {
+    border: 1px solid var(--color-gray);
+    color: var(--color-dim);
+  }
+  .s-re {
+    border: 1px solid var(--color-pink);
+    color: var(--color-pink);
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--color-gray);
+    margin: 0;
+    padding: 8px 0 0;
+    font-size: 9px;
+    color: var(--color-dim);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-family: var(--font-mono);
+  }
+
+  /* ── TERMINAL BLOCK ── */
+  .terminal {
+    border: 1px solid var(--color-gray);
+    margin: 48px 0;
+    font-family: var(--font-mono);
+  }
+  .terminal-header {
+    background: var(--color-gray);
+    padding: 8px 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .t-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+  .t-red {
+    background: #ff5f57;
+  }
+  .t-yellow {
+    background: #febc2e;
+  }
+  .t-green-dot {
+    background: #28c840;
+  }
+  .t-title {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.5);
+    margin-left: 8px;
+    letter-spacing: 0.08em;
+  }
+  .terminal-body {
+    padding: 20px;
+  }
+  .t-line {
+    font-size: 11px;
+    color: var(--color-dim);
+    margin-bottom: 6px;
+  }
+  .t-line .prompt {
+    color: var(--color-green);
+  }
+  .t-line .cmd {
+    color: var(--color-white);
+  }
+  .t-line .out {
+    color: var(--color-aaa);
+    padding-left: 16px;
+    display: block;
+  }
+  .t-line .pink-out {
+    color: var(--color-pink);
+    padding-left: 16px;
+    display: block;
+  }
+  .t-cursor {
+    display: inline-block;
+    width: 8px;
+    height: 13px;
+    background: var(--color-green);
+    margin-left: 2px;
+    animation: blink 1s step-end infinite;
+    vertical-align: text-bottom;
+  }
+  @keyframes blink {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
   }
 }

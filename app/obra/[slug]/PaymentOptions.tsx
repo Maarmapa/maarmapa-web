@@ -9,7 +9,6 @@ export function PaymentOptions({ artwork }: { artwork: Artwork }) {
   const [loading, setLoading] = useState<Method | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  // Para obras de alto valor recomendamos consultar primero
   const highValue =
     artwork.priceClp >= 10_000_000 || artwork.inquiryRecommended;
 
@@ -19,11 +18,10 @@ export function PaymentOptions({ artwork }: { artwork: Artwork }) {
     try {
       if (method === "inquiry") {
         const subject = encodeURIComponent(
-          `Interés en obra: ${artwork.title}`
+          `interés en obra: ${artwork.title}`
         );
         const body = encodeURIComponent(
-          `Hola maarmapa,\n\nMe interesa la obra "${artwork.title}" (${artwork.dimensions}).\n` +
-            `Quisiera más información sobre disponibilidad, envío y formas de pago.\n\nGracias.`
+          `hola maarmapa,\n\nme interesa la obra "${artwork.title}" (${artwork.dimensions}).\nquisiera más información sobre disponibilidad, envío y formas de pago.\n\ngracias.`
         );
         window.location.href = `mailto:mario@boykot.cl?subject=${subject}&body=${body}`;
         return;
@@ -34,7 +32,7 @@ export function PaymentOptions({ artwork }: { artwork: Artwork }) {
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ slug: artwork.slug }),
       });
-      if (!res.ok) throw new Error(`Error ${res.status}`);
+      if (!res.ok) throw new Error(`error ${res.status}`);
       const data: { url?: string; message?: string } = await res.json();
       if (data.url) {
         window.location.href = data.url;
@@ -42,7 +40,7 @@ export function PaymentOptions({ artwork }: { artwork: Artwork }) {
         setError(data.message);
       }
     } catch (e) {
-      const msg = e instanceof Error ? e.message : "Error desconocido";
+      const msg = e instanceof Error ? e.message : "error desconocido";
       setError(msg);
     } finally {
       setLoading(null);
@@ -51,62 +49,76 @@ export function PaymentOptions({ artwork }: { artwork: Artwork }) {
 
   if (artwork.status === "sold") {
     return (
-      <div className="mt-6 p-4 bg-black text-white text-center">
-        <p className="font-medium">Obra vendida</p>
-        <p className="text-sm text-white/70 mt-1">
-          Ya no se encuentra disponible. Contacta a maarmapa por obras
-          similares.
+      <div className="border border-[var(--color-gray)] p-5 text-center">
+        <p className="font-mono text-[10px] font-bold text-[var(--color-dim)] tracking-[0.2em] uppercase mb-2">
+          ── unavailable
+        </p>
+        <p className="font-mono text-xs text-[var(--color-aaa)]">
+          this work has been sold.
+        </p>
+        <p className="font-mono text-[10px] text-[var(--color-dim)] mt-2">
+          contact maarmapa for similar pieces
         </p>
       </div>
     );
   }
 
   return (
-    <div className="mt-6 space-y-3">
+    <div className="space-y-3">
+      <div className="font-mono text-[9px] font-bold text-[var(--color-dim)] tracking-[0.2em] uppercase mb-2">
+        ── select payment method
+      </div>
+
       {highValue && (
         <button
           onClick={() => startCheckout("inquiry")}
-          className="w-full py-4 bg-[var(--color-ink)] text-[var(--color-canvas)] font-medium hover:bg-[var(--color-gold)] transition-colors"
+          className="btn-p w-full !text-left !block"
+          style={{ padding: "14px 22px" }}
         >
-          ✉ Consultar disponibilidad y envío
+          ✉ consultar disponibilidad y envío ↗
         </button>
       )}
 
       <button
         onClick={() => startCheckout("mp")}
         disabled={loading !== null}
-        className="w-full py-3 border border-black/20 hover:border-black hover:bg-black hover:text-white transition disabled:opacity-50 text-sm"
+        className="btn-g w-full !text-left !block"
+        style={{ padding: "14px 22px" }}
       >
-        {loading === "mp" ? "Cargando…" : "🇨🇱 Pagar con Mercado Pago"}
+        {loading === "mp" ? "loading…" : "🇨🇱 mercado pago · cards / cuotas"}
       </button>
 
       <button
         onClick={() => startCheckout("khipu")}
         disabled={loading !== null}
-        className="w-full py-3 border border-black/20 hover:border-black hover:bg-black hover:text-white transition disabled:opacity-50 text-sm"
+        className="btn-g w-full !text-left !block"
+        style={{ padding: "14px 22px" }}
       >
-        {loading === "khipu" ? "Cargando…" : "🏦 Transferencia (Khipu)"}
+        {loading === "khipu" ? "loading…" : "🏦 khipu · bank transfer (cl)"}
       </button>
 
       <button
         onClick={() => startCheckout("x402")}
         disabled={loading !== null}
-        className="w-full py-3 border border-black/20 hover:border-black hover:bg-black hover:text-white transition disabled:opacity-50 text-sm"
+        className="btn-green-outline w-full !text-left !block"
+        style={{ padding: "14px 22px" }}
       >
-        {loading === "x402" ? "Cargando…" : "⚡ Pagar con USDC (x402, Base)"}
+        {loading === "x402" ? "loading…" : "⚡ x402 · usdc on base ✦"}
       </button>
 
       {!highValue && (
         <button
           onClick={() => startCheckout("inquiry")}
-          className="w-full py-3 text-sm text-[var(--color-muted)] hover:text-[var(--color-ink)]"
+          className="w-full font-mono text-[10px] text-[var(--color-dim)] tracking-wider uppercase pt-3 hover:text-[var(--color-green)] transition-colors"
         >
-          O escribir al artista directamente →
+          → or write to the artist
         </button>
       )}
 
       {error && (
-        <p className="text-sm text-red-600 mt-2">⚠ {error}</p>
+        <p className="font-mono text-xs text-[var(--color-pink)] mt-3">
+          ⚠ {error}
+        </p>
       )}
     </div>
   );
