@@ -13,9 +13,7 @@ const nextConfig: NextConfig = {
   },
   // Para deploy a IPFS (maarmapa.eth.limo) — usar `npm run export:ipfs`
   // output: "export",  // descomentar cuando hagas build estático para IPFS
-  experimental: {
-    typedRoutes: true,
-  },
+  typedRoutes: true,
 };
 
 export default nextConfig;
