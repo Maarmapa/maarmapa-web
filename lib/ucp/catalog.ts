@@ -11,6 +11,14 @@ import {
 const CURRENCY = "CLP";
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://maarmapa.eth.limo";
 
+function absoluteImageUrl(imagePath: string): string {
+  if (imagePath.startsWith("http://") || imagePath.startsWith("https://")) {
+    return imagePath;
+  }
+  // Relative path → prepend base URL
+  return `${BASE_URL}${imagePath.startsWith("/") ? "" : "/"}${imagePath}`;
+}
+
 function artworkToProduct(art: Artwork): UcpProduct {
   const productId = `${UCP_SHOP_GID_PREFIX}/Artwork/${art.slug}`;
   const variantId = `${UCP_SHOP_GID_PREFIX}/ArtworkVariant/${art.slug}`;
@@ -32,7 +40,7 @@ function artworkToProduct(art: Artwork): UcpProduct {
     media: [
       {
         type: "image",
-        url: art.image,
+        url: absoluteImageUrl(art.image),
         alt_text: `${art.title} — ${art.technique} by maarmapa`,
       },
     ],

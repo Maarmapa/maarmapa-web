@@ -1,10 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Permite imágenes desde Shopify CDN (mientras migramos a R2) y desde R2/Cloudflare
+  // Imágenes self-hosted en /public/artworks/ (sin dependencia de Shopify).
+  // Permitidos hosts adicionales: R2 / IPFS por si quieren agregarse en el futuro.
   images: {
     remotePatterns: [
-      { protocol: "https", hostname: "cdn.shopify.com" },
       { protocol: "https", hostname: "**.r2.cloudflarestorage.com" },
       { protocol: "https", hostname: "**.r2.dev" },
       { protocol: "https", hostname: "ipfs.io" },

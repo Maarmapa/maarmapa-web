@@ -1,6 +1,6 @@
 {
   "$schema": "./artworks.schema.json",
-  "_comment": "Catálogo de obras maarmapa. Datos extraídos de Shopify (maarmapa shop) el 2026-05-18.",
+  "_comment": "Catálogo de obras maarmapa. Datos extraídos de Shopify (maarmapa shop) el 2026-05-18. Imágenes self-hosted en /public/artworks/ — no dependen de Shopify.",
   "artist": {
     "name": "maarmapa",
     "fullName": "Mario Maldonado Parra",
@@ -22,7 +22,7 @@
       "priceUsd": 6800,
       "status": "available",
       "edition": "Original — pieza única",
-      "image": "https://cdn.shopify.com/s/files/1/0963/3192/3750/files/xglobe-fish.png?v=1774633106",
+      "image": "/artworks/pachamama-fruits.png",
       "description": "Frutos de la tierra como manifiesto. Pachamama Fruits ©, acrílico sobre lino ejecutado en 2015."
     },
     {
@@ -36,7 +36,7 @@
       "priceUsd": 9400,
       "status": "available",
       "edition": "Original — One of a Kind",
-      "image": "https://cdn.shopify.com/s/files/1/0963/3192/3750/files/xxglobe-fish-_Recuperado.png?v=1774633297",
+      "image": "/artworks/globefish.png",
       "description": "El globo como océano. El pez como viajero. GlobeFish es una pintura al óleo original que medita sobre la globalización a través de la mirada de un artista urbano chileno."
     },
     {
@@ -50,7 +50,7 @@
       "priceUsd": 7300,
       "status": "available",
       "edition": "Original — pieza única",
-      "image": "https://cdn.shopify.com/s/files/1/0963/3192/3750/files/xstrawberry-gummy-plant_8bf2e7a0-4ae8-43c0-8667-ca8520ce4995.png?v=1752601632",
+      "image": "/artworks/strawberry-gummy-plant.png",
       "description": "Strawberry Gummy Plant ©. Acrílico sobre lienzo 100×100cm. Ejecutado en 2015."
     },
     {
@@ -64,7 +64,7 @@
       "priceUsd": 52000,
       "status": "available",
       "edition": "Original — One of a Kind",
-      "image": "https://cdn.shopify.com/s/files/1/0963/3192/3750/files/xxxxglobe-fish.png?v=1752601819",
+      "image": "/artworks/mario-bros-roses.png",
       "description": "Cultura pop reencarnada en pintura. El pixel se vuelve pincelada. Mario Bros Roses es una pintura al óleo de gran formato del artista chileno maarmapa.",
       "inquiryRecommended": true
     },
@@ -79,7 +79,7 @@
       "priceUsd": 5200,
       "status": "available",
       "edition": "Original — One of a Kind",
-      "image": "https://cdn.shopify.com/s/files/1/0963/3192/3750/files/xIMG_5383_50a73c9c-4619-44c1-9701-05c9547bd445.png?v=1774632175",
+      "image": "/artworks/cities-0.png",
       "description": "El punto de partida. La ciudad antes de ser ciudad — azul, abierta, eléctrica. Cero como origen."
     },
     {
@@ -93,7 +93,7 @@
       "priceUsd": 5200,
       "status": "available",
       "edition": "Original — One of a Kind",
-      "image": "https://cdn.shopify.com/s/files/1/0963/3192/3750/files/xIMG_5383_65961932-b119-4409-beba-1b333d42b3e9.png?v=1774632419",
+      "image": "/artworks/city-love.png",
       "description": "El amor como arquitectura. Calles que palpitan, edificios que respiran, una ciudad pintada en oro y negro."
     },
     {
@@ -107,7 +107,7 @@
       "priceUsd": 7000,
       "status": "available",
       "edition": "Original — One of a Kind",
-      "image": "https://cdn.shopify.com/s/files/1/0963/3192/3750/files/Captura-de-pantalla-2026-03-20-a-la_s_-09.47.13.png?v=1774632584",
+      "image": "/artworks/city-og.png",
       "description": "La ciudad original. Memoria urbana como trazo colectivo — edificios, calles e infraestructura registrados al óleo sobre lienzo."
     }
   ]
