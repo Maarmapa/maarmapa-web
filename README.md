@@ -5,6 +5,7 @@ Tienda personal de obras originales de **maarmapa** (Mario Maldonado Parra), art
 - **Dominios**: `maarmapa.eth.limo` (ENS gateway, gratis) y `maarmapa.vercel.app` (Vercel free tier)
 - **Pagos**: Mercado Pago (Chile) · Khipu (Chile) · USDC vía **x402** (internacional crypto)
 - **Stack**: Next.js 15 (App Router) · React 19 · Tailwind 4 · Supabase · viem (Base)
+- **Agentic Commerce**: UCP-compliant (Universal Commerce Protocol) — agentes IA pueden descubrir y comprar obras vía `/api/ucp/mcp`
 
 ---
 
@@ -211,6 +212,93 @@ Edita `data/artworks.json`. Cada obra:
 | Dominio ENS | No | ✅ maarmapa.eth.limo |
 | Branding propio | Limitado | Total |
 | Velocidad | Media | Next.js 15 + cache |
+
+---
+
+## 🤖 UCP — Universal Commerce Protocol
+
+maarmapa-web es **UCP-compliant** (spec versión `2026-04-08`). Esto significa que cualquier agente de IA (Claude, Cursor, Gemini, agentes custom) puede descubrir y operar sobre el catálogo de obras usando un protocolo estándar.
+
+### Discovery
+
+```bash
+# Manifest del servidor
+curl https://maarmapa.eth.limo/.well-known/ucp.json
+```
+
+### Endpoint MCP (JSON-RPC 2.0)
+
+`POST /api/ucp/mcp`
+
+### Tools disponibles
+
+| Categoría | Tools |
+|-----------|-------|
+| **Catalog** | `search_catalog`, `lookup_catalog`, `get_product` |
+| **Cart** | `create_cart`, `get_cart`, `update_cart`, `cancel_cart` |
+| **Checkout** | `create_checkout`, `get_checkout`, `update_checkout`, `complete_checkout`, `cancel_checkout` |
+| **Order** | `get_order` |
+
+### Ejemplos
+
+```bash
+# Listar tools
+curl -X POST https://maarmapa.eth.limo/api/ucp/mcp \
+  -H "content-type: application/json" \
+  -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+
+# Buscar obras
+curl -X POST https://maarmapa.eth.limo/api/ucp/mcp \
+  -H "content-type: application/json" \
+  -d '{"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"search_catalog","arguments":{"query":"city"}}}'
+
+# Detalle de obra
+curl -X POST https://maarmapa.eth.limo/api/ucp/mcp \
+  -H "content-type: application/json" \
+  -d '{"jsonrpc":"2.0","id":3,"method":"tools/call","params":{"name":"get_product","arguments":{"id":"globefish"}}}'
+
+# Crear carrito
+curl -X POST https://maarmapa.eth.limo/api/ucp/mcp \
+  -H "content-type: application/json" \
+  -d '{"jsonrpc":"2.0","id":4,"method":"tools/call","params":{"name":"create_cart","arguments":{"line_items":[{"variant_id":"gid://maarmapa/ArtworkVariant/globefish","quantity":1}]}}}'
+```
+
+### Modelo de pagos en UCP
+
+Como maarmapa soporta múltiples métodos (Mercado Pago, Khipu, x402 USDC), **el agente no procesa pagos directamente**. El flujo UCP es:
+
+1. Agente busca obras (`search_catalog`)
+2. Agente arma carrito (`create_cart`)
+3. Agente inicia checkout (`create_checkout`) → respuesta `status: requires_escalation` + `continue_url`
+4. Agente redirige al comprador a `continue_url` (página `/obra/[slug]` de maarmapa-web)
+5. Comprador selecciona método de pago y completa
+6. Agente puede consultar estado vía `get_order`
+
+Esto es 100% compatible con el spec UCP de Shopify (versión 2026-04-08).
+
+### Setup de tablas UCP
+
+Las tablas `maarmapa_ucp_carts` y `maarmapa_ucp_checkouts` se crean al ejecutar la migración SQL:
+
+```bash
+# Copiar el contenido de supabase/migrations/0001_ucp_tables.sql
+# Pegar en Supabase Dashboard → SQL Editor → Run
+```
+
+### Arquitectura UCP
+
+```
+lib/ucp/
+├── types.ts          # Schemas TypeScript (UCP v2026-04-08)
+├── catalog.ts        # search_catalog, lookup_catalog, get_product
+├── cart.ts           # CRUD de carritos (Supabase-backed)
+├── checkout.ts       # Sesiones de checkout (handoff a storefront)
+└── order.ts          # Lookup de órdenes
+
+app/api/
+├── ucp/mcp/route.ts          # Endpoint JSON-RPC 2.0
+└── well-known/ucp/route.ts   # Discovery manifest
+```
 
 ---
 
