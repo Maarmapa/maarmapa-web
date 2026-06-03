@@ -1,0 +1,191 @@
+id,name,slug,parent,count
+6318,$10.000-$20.000,precio-10-20,6317,1
+6320,$30.000-o más,precio-30-mas,6317,4
+18,Accesorios,accesorios,17,22
+2054,Accesorios,accesorios-materiales,32,82
+2544,Accesorios Holbein,accesorios-holbein,2340,83
+6322,Acrea,acrea,676,6
+3182,Acrilex,acrilex,0,11
+2543,Acryla Gouache Holbein,acryla-gouache-holbein,2340,16
+3549,Acrílico Denso,acrilico-denso,2340,14
+2538,Acrílico Holbein,acrilico-holbein,2340,16
+3296,Acuarela,acuarela-pintura,16,47
+2052,Acuarela,acuarela-materiales,32,21
+2545,Acuarela Holbein,acuarela-holbein,2340,25
+6154,Aditivos,aditivos,0,10
+1921,Aerógrafos,aerografos,32,7
+1898,Airbrush,airbrush,32,7
+17,Angelus,angelus,16,265
+3405,Angelus,angelus-pinturas,29,3
+1043,Angelus,angelus-materiales,32,7
+3068,Aqua Color Brush,aquacolorbrush-markers,597,3
+2017,Aqua Ink,aqua-ink,1478,14
+5813,Barnices,barnices,0,14
+1476,Base agua,pens-base-agua,639,1
+2008,Base Alcohol,base-alcohol,597,1
+1047,Base oleo,base-oleo,597,1
+6808,Bastidores,bastidores,0,4
+2050,Blackbook,blackbook-materiales,32,1
+1915,BlackLiner,blackliner,639,5
+5041,Boligrafo,boligrafo,639,26
+1923,Bolsos,bolsos,32,14
+1473,Brushpen,brushpen,597,21
+2021,Burner,burner,74,3
+6820,Cajas Acrílicas Copic,copic_caja,0,10
+2317,Calco,calco,32,4
+1896,Caps,caps,32,26
+1483,Cartridge,cartridge,32,2
+642,Catridge Recargas,catridge-recargas,639,1
+2015,Chalk,chalk,1478,8
+6788,Ciao set,ciao_set,676,41
+42,Collector Edition,collector-edition,29,1
+677,Color,color,0,114
+2176,Contenedor,contenedor,32,1
+1479,Copic,copic-markers,597,293
+676,Copic,copic,0,149
+6819,Copic Herramientas de mantenimiento,copic_mantenimiento,0,18
+1904,Copic Markers,copic-markers-markers,597,39
+6348,Copic Shikishi,copic-shikishi,676,4
+26,Cordones,cordones,17,192
+6434,Cordones Planos Básicos,cordones_planos_basicos,0,32
+6440,Cordones Planos de Cuero,cordones_planos_cuero,0,5
+6435,Cordones Planos Encerados,cordones_planos_encerados,0,2
+6437,Cordones Planos Estampados,cordones_planos_estampados,0,6
+6433,Cordones Planos Jordan 1 Reemplazos,cordones_planos_jordan,0,3
+6438,Cordones Planos Multicolor,cordones_planos_multicolor,0,4
+6439,Cordones Planos Reflectantes,cordones_planos_reflectantes,0,21
+6422,Cordones Redondos Básicos,cordones_redondos_basicos,0,29
+6432,Cordones Redondos Fosforescentes,cordones_redondos_fosforescentes,0,1
+6430,Cordones Redondos Metalizados,cordones_redondos_metalizados,0,4
+6427,Cordones Redondos Multicolor,cordones_redondos_multicolor,0,8
+6424,Cordones Redondos Ovalados,cordones_redondos_ovalados,0,7
+6426,Cordones Redondos para Bota,cordones_redondos_bota,0,8
+6431,Cordones Redondos Reflectantes,cordones_redondos_reflectantes,0,23
+6425,Cordones Redondos Roshe-Style,cordones_redondos_roshe_style,0,14
+6423,Cordones Redondos XL,cordones_redondos_xl,0,10
+3392,Croqueras,croqueras-papeles,671,13
+1894,Croqueras,croqueras,32,6
+6349,Croqueras Copic,copic-sketchbook,676,3
+72,Cuero,cuero,17,3
+2183,Decotape,decotape,32,2
+6317,Deseos navideños,deseos-navidenos,0,5
+3298,Destacados,destacados,0,5
+1472,Display,display,597,7
+2167,Doble contacto,doble-contacto,32,9
+2296,Ecoline,ecoline,597,11
+1471,Empty,empty,597,36
+3306,Empty,empty-markets,0,7
+5707,Esmalte,esmalte,0,4
+2166,Estuche,estuche,32,16
+6821,Estuche Copic,copic_estuche,0,8
+1900,Fiskars,fiskars,32,1
+2542,Fluid Holbein,fluid-holbein,2340,3
+2319,Foil,foil,32,1
+4361,GAC,gac,2054,1
+1829,Gasenfude,gasenfude,639,1
+3403,Glitterlites,glitterlites,29,1
+6450,Goma moldeable,goma-amasable,0,2
+6449,Gomas,goma,0,8
+6446,Gomas y sacapuntas,gomas-sacapuntas,32,13
+2541,Gouache Holbein,gouache-holbein,2340,13
+4962,Grafito,grafito,639,10
+5043,Herramientas de corte,herramientas-de-corte,32,20
+6421,Herretes,herretes,0,13
+4925,Higashiyama,higashiyama,597,4
+4461,Holbein,holbein-pens,639,5
+2340,Holbein,holbein,16,191
+2014,ICscreen,icscreen,32,25
+1485,Individual,copic-individual,1479,9
+1487,Individual,molotow-markers-individual,1478,1
+6044,INKTOBER,inktober,0,2
+1042,Kirarina,kirarina,597,21
+4360,Krack,krack,16,2
+4498,Kuretake,kuretake,0,38
+661,Lapicera,lapicera,639,1
+3420,Lapices de colores,lapices-de-colores,639,32
+31,Limpiadores,limpiadores,0,18
+4542,Liquid Chrome,liquid-chrome,1478,5
+3868,Liquid Kicks Coat Tops,liquid-kicks-coat-tops,16,1
+639,Lápices,lapices,0,217
+2540,Lápices Holbein,lapices-holbein,2340,11
+5008,Lápiz gel,lapiz-gel,639,1
+6451,Lápiz goma,lapiz-goma,0,2
+5816,Látex,latex,0,1
+6443,Mangos para plumillas,pens-mangos,639,7
+597,Marcadores,marcadores,0,628
+6356,Marcadores pintura,marcadores-pintura,0,1
+32,Materiales,materiales,0,528
+1478,Molotow,molotow-markers,597,91
+1905,Molotow markers,molotow-markers-markers,597,3
+1913,Multiliners,multiliners,639,28
+40,Neon,neon,29,2
+1916,Nibs,nibs-pens,639,3
+1911,Nibs,nibs,597,34
+2345,Oleo,oleo,16,22
+2016,ONE4ALL,one4all,1478,41
+1912,Opaque White,opaque-white,597,3
+3396,Originales,originales,3395,5
+2048,Pad,pad,32,5
+671,Papeles,papeles,32,108
+6350,Papeles Copic,copic-papers,676,10
+6347,Paper Selection,paper-selection,676,12
+6369,Pastel seco,pastel-seco,0,2
+39,Pearlescents,pearlescents,29,2
+1045,Pegamento,pegamento,32,2
+33,Pinceles,pinceles,32,99
+16,Pintura,pintura,0,573
+5701,Pintura multipropósito,multiproposito,0,38
+5811,Pintura para cuero,para-cuero,0,5
+29,Pinturas,pinturas,17,15
+3395,Pinturas,pinturas-arte,0,1
+5812,Pinturas en aerosol,aerosoles,0,8
+6442,Plumillas para manga,pens-plumillas,639,27
+663,Plumillas y mangos,plumillas-mangos,639,44
+1046,Plumones vacios,plumones-vacios,597,7
+4977,Portaminas y minas,portaminas-y-minas,639,27
+3409,Posca,posca,597,19
+3391,Premium Molotow,premium-molotow,74,3
+5708,Primer,primer,0,1
+2318,Print,print,32,1
+3546,Prismacolor,prismacolor,639,14
+638,Punta,punta,597,19
+1863,Punta T,punta-t,597,1
+1477,Puntas,puntas,32,29
+1562,Recarga,recarga,1478,2
+3303,refill molotow,refill-molotow,0,3
+1893,Resma,resma,671,16
+1044,Sellante,sellante-materiales,32,6
+1899,Sellantes,sellantes,32,16
+1040,Sellantes y aditivos,sellante,16,12
+1041,Sellantes y aditivos,sellante-angelus,17,26
+1910,Set Multiliner,set-multiliner,597,11
+1486,Sets,molotow-markers-sets,1478,37
+1480,Sets,sets,1479,64
+1844,Sets,sets-pens,639,18
+2004,Sets,sets-materiales,32,2
+1906,Sets Copic,sets-copic,597,87
+2537,Sets Holbein,sets-holbein,2340,77
+1909,Sets Molotow,sets-molotow,597,31
+1903,Shikishi,shikishi,32,6
+2051,Sketchbook,sketchbook,32,1
+4145,Solar Color,solar-color,16,24
+1482,Spray,spray,16,13
+74,Sprays,sprays,16,15
+38,Standard Paint,standard-paint,29,7
+2000,stickers,stickers,32,1
+662,Tinta,tinta,16,6
+1828,Tintas,tintas,16,5
+3406,Tintura,tintura-angelus-pinturas,3405,2
+5815,Tinturas,tintura,0,4
+640,Tiralineas,tiralineas,639,32
+1475,Tiralíneas Brushpen,brushpen-pens,639,18
+1122,Tiza,tiza-pintura,16,11
+1827,Tiza,tiza-markers,597,11
+1121,Tiza,tiza,0,11
+1895,Tramas,tramas,32,85
+2018,Transformer,transformer,1478,4
+15,Uncategorized,uncategorized,0,115
+3863,Urban Fine Art,urban-fine-art,74,8
+3179,Xpressit,xpressit,0,42
+2013,Youth,youth,32,20
+2539,Óleo Holbein,oleo-holbein,2340,28

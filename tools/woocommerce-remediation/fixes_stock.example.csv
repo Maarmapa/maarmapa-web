@@ -1,0 +1,2 @@
+id,stock_status,stock_quantity,note
+52385,instock,,Solo si de verdad hay stock. stock_status: instock|outofstock|onbackorder. stock_quantity opcional.

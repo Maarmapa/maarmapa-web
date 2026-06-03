@@ -1,0 +1,2 @@
+product_id,variation_id,stock_status,stock_quantity,note
+52385,,instock,,Usa 'node remediate.mjs list-variations 52385' para obtener los variation_id. Solo marca instock lo que tengas en bodega.
