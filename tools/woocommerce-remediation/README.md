@@ -16,6 +16,18 @@ que **sí tenga credenciales Read/Write**.
 
 Referencia: [`data/categories.csv`](data/categories.csv) — las 190 categorías reales (id, nombre, slug, parent) para mapear.
 
+## Orden de trabajo recomendado → [`data/prioridad.csv`](data/prioridad.csv)
+
+Cruce de los defectos, ordenado por severidad:
+
+| Prioridad | Qué es | Cantidad | Acción |
+|---|---|---|---|
+| 🚨 **P1** | Carta rota **Y** sin categoría (doblemente rotos) | **5** | Recategorizar + restock variantes |
+| **P2** | Carta rota con categoría | 28 | Restock variantes (`list-variations` → `apply-variation-stock`) |
+| **P3** | Sin categoría (no es carta rota) | 199 | Recategorizar (`apply-categories`) |
+
+**Empezar por los 5 de P1** (todos merch agotado y sin categoría): `114737`, `114685`, `114553`, `114517`, `114367`.
+
 Casos de ejemplo que originaron la auditoría:
 - `52385` Molotow Metallic 400ml → carta rota (Gold/Silver agotados). *Nota: esa línea SOLO tiene 2 colores; no faltan colores, es restock.*
 - `61661` Pluma Drawing Pen Copic → sin categoría (cuelga de Uncategorized).
