@@ -72,7 +72,7 @@ const SERVER_INFO = {
     currency: "CLP",
     country: "CL",
     description:
-      "Original oil paintings by Chilean contemporary artist maarmapa.",
+      "Original acrylic paintings by Chilean contemporary artist maarmapa.",
     payment_methods: [
       { id: "mercadopago", label: "Mercado Pago (CL)", regions: ["CL"] },
       { id: "khipu", label: "Khipu bank transfer (CL)", regions: ["CL"] },
