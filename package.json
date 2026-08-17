@@ -8,7 +8,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "export:ipfs": "next build && next export -o out-ipfs"
+    "export:ipfs": "next build && next export -o out-ipfs",
+    "test:x402": "node --test scripts/x402-recipient.test.mjs"
   },
   "dependencies": {
     "next": "^15.2.0",

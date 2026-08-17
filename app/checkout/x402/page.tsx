@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { getArtwork, formatUsd } from "@/lib/artworks";
-import { PAYMENT_RECIPIENT, USDC_BASE } from "@/lib/x402";
+import { getPaymentRecipient, USDC_BASE } from "@/lib/x402";
 import { X402Verify } from "./X402Verify";
 
 export default async function X402CheckoutPage({
@@ -10,6 +10,15 @@ export default async function X402CheckoutPage({
 }) {
   const { order, slug } = await searchParams;
   const artwork = slug ? getArtwork(slug) : undefined;
+
+  // Env → ENS (maarmapa.eth) → null. Si es null NO mostramos ninguna
+  // dirección (jamás la cero): el pago queda deshabilitado en esta vista.
+  let recipient: string | null = null;
+  try {
+    recipient = await getPaymentRecipient();
+  } catch (e) {
+    console.error(e instanceof Error ? e.message : e);
+  }
 
   if (!order || !artwork) {
     return (
@@ -68,9 +77,16 @@ export default async function X402CheckoutPage({
         <p className="font-mono text-[9px] text-[var(--color-dim)] uppercase tracking-[0.2em] mb-2">
           send to
         </p>
-        <code className="block font-mono text-[11px] text-[var(--color-green)] break-all leading-relaxed">
-          {PAYMENT_RECIPIENT}
-        </code>
+        {recipient ? (
+          <code className="block font-mono text-[11px] text-[var(--color-green)] break-all leading-relaxed">
+            {recipient}
+          </code>
+        ) : (
+          <p className="font-mono text-[11px] text-[var(--color-pink)] leading-relaxed">
+            recipient unavailable — usdc payment temporarily disabled. do not
+            send funds; try again later or pay in CLP.
+          </p>
+        )}
         <p className="font-mono text-[10px] text-[var(--color-dim)] mt-2">
           ens:{" "}
           <span className="text-[var(--color-pink)]">maarmapa.eth</span>
@@ -81,7 +97,7 @@ export default async function X402CheckoutPage({
         </p>
       </div>
 
-      <X402Verify order={order} />
+      {recipient && <X402Verify order={order} />}
 
       {/* Instructions terminal */}
       <div className="terminal mt-8">

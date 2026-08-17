@@ -1,6 +1,10 @@
 import { NextResponse } from "next/server";
 import { getArtwork } from "@/lib/artworks";
 import { createOrder } from "@/lib/supabase";
+import {
+  getPaymentRecipient,
+  PaymentRecipientUnavailableError,
+} from "@/lib/x402";
 
 export const runtime = "nodejs";
 
@@ -21,6 +25,10 @@ export async function POST(req: Request) {
       );
     }
 
+    // Sin dirección receptora (env o maarmapa.eth vía ENS) no abrimos orden:
+    // 503 antes de mandar al comprador a una página de pago sin destino.
+    await getPaymentRecipient();
+
     const order = await createOrder({
       artwork_slug: artwork.slug,
       artwork_title: artwork.title,
@@ -33,6 +41,13 @@ export async function POST(req: Request) {
       url: `${origin}/checkout/x402?order=${order.short_id}&slug=${artwork.slug}`,
     });
   } catch (e) {
+    if (e instanceof PaymentRecipientUnavailableError) {
+      console.error(e.message);
+      return NextResponse.json(
+        { message: "Pago USDC temporalmente no disponible" },
+        { status: 503 }
+      );
+    }
     const msg = e instanceof Error ? e.message : "Error desconocido";
     return NextResponse.json({ message: msg }, { status: 500 });
   }
