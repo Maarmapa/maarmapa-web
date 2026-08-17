@@ -126,8 +126,13 @@ create index if not exists idx_maarmapa_orders_short_id on maarmapa_orders(short
 ### x402 (USDC en Base)
 1. Si ya tenés `maarmapa.eth`, ve a https://app.ens.domains
 2. Configura el **address record** apuntando a tu wallet de Base
-3. Pega la dirección en `.env.local` como `X402_RECIPIENT_ADDRESS`
+3. (Opcional) Pega la dirección en `.env.local` como `X402_RECIPIENT_ADDRESS`
 4. Asegúrate que tu wallet pueda recibir USDC en Base
+
+Orden de resolución del receptor (`lib/x402.ts` → `getPaymentRecipient()`):
+`X402_RECIPIENT_ADDRESS` válida → si no, `maarmapa.eth` vía ENS en mainnet
+(cache 1h) → si no, **503** "pago USDC no disponible". La dirección cero
+`0x000…000` jamás se usa (un pago ahí se quema). Test: `npm run test:x402`.
 
 ---
 

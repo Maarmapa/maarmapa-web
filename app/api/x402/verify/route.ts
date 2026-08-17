@@ -5,7 +5,8 @@ import { NextResponse } from "next/server";
 import { artworks } from "@/lib/artworks";
 import {
   artworkToUsdcAmount,
-  PAYMENT_RECIPIENT,
+  getPaymentRecipient,
+  PaymentRecipientUnavailableError,
   verifyUsdcPayment,
 } from "@/lib/x402";
 import { markOrderPaid, supabase } from "@/lib/supabase";
@@ -46,8 +47,11 @@ export async function POST(req: Request) {
       );
     }
 
+    // Env → ENS (maarmapa.eth) → PaymentRecipientUnavailableError.
+    // Nunca la dirección cero: sin receptor conocido no se puede validar nada.
+    const recipient = await getPaymentRecipient();
     const expected = artworkToUsdcAmount(artwork);
-    const result = await verifyUsdcPayment(txHash, expected, PAYMENT_RECIPIENT);
+    const result = await verifyUsdcPayment(txHash, expected, recipient);
     if (!result.ok) {
       return NextResponse.json(
         { ok: false, message: result.reason },
@@ -65,6 +69,13 @@ export async function POST(req: Request) {
       amount: result.amount?.toString(),
     });
   } catch (e) {
+    if (e instanceof PaymentRecipientUnavailableError) {
+      console.error(e.message);
+      return NextResponse.json(
+        { ok: false, message: "Pago USDC temporalmente no disponible" },
+        { status: 503 }
+      );
+    }
     const msg = e instanceof Error ? e.message : "verify error";
     return NextResponse.json({ ok: false, message: msg }, { status: 500 });
   }
