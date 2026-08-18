@@ -35,7 +35,7 @@ export async function GET() {
       currency: "CLP",
       country: "CL",
       description:
-        "Original oil paintings by Chilean contemporary artist maarmapa.",
+        "Original acrylic paintings by Chilean contemporary artist maarmapa.",
     },
     auth: {
       type: "ucp-agent-profile",
