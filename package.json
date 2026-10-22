@@ -16,7 +16,7 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "@supabase/supabase-js": "^2.45.0",
-    "mercadopago": "^2.0.15",
+    "mercadopago": "^3.6.1",
     "viem": "^2.21.0",
     "clsx": "^2.1.1"
   },
